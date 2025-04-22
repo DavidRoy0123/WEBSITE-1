@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAVID ROY - A Super Smart Website</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --neon-pink: #ff2a6d;
+            --electric-blue: #05d9e8;
+            --vivid-cyan: #00f7ff;
+            --digital-orange: #ff8e00;
+            --lime-green: #00ff85;
+            --deep-violet: #8f00ff;
+            --dark-bg: #0f0f1a;
+            --light-bg: #f8f9fa;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark-bg);
+            color: white;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            padding: 30px 0;
+            position: relative;
+            z-index: 10;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--neon-pink), var(--electric-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-decoration: none;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .social-icon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .social-icon:hover::before {
+            left: 100%;
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .facebook {
+            background-color: #1877f2;
+        }
+        
+        .youtube {
+            background-color: #ff0000;
+        }
+        
+        .whatsapp {
+            background-color: #25d366;
+        }
+        
+        .gmail {
+            background-color: #db4437;
+        }
+        
+        /* Abstract shapes */
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.7;
+            z-index: -1;
+        }
+        
+        .shape-1 {
+            width: 500px;
+            height: 500px;
+            background: var(--neon-pink);
+            top: -200px;
+            left: -200px;
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        .shape-2 {
+            width: 400px;
+            height: 400px;
+            background: var(--electric-blue);
+            bottom: -150px;
+            right: -100px;
+            animation: float 10s ease-in-out infinite;
+        }
+        
+        .shape-3 {
+            width: 300px;
+            height: 300px;
+            background: var(--lime-green);
+            top: 50%;
+            left: 30%;
+            animation: float 12s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+        
+        /* Hero section */
+        .hero {
+            padding: 100px 0;
+            position: relative;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 72px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, var(--neon-pink), var(--electric-blue), var(--lime-green));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+        }
+        
+        /* Read more button */
+        .read-more-btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            font-size: 16px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .read-more-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .read-more-btn::after {
+            content: '→';
+            position: absolute;
+            right: -20px;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .read-more-btn:hover::after {
+            right: 20px;
+            opacity: 1;
+        }
+        
+        /* About section */
+        .about {
+            padding: 100px 0;
+            position: relative;
+        }
+        
+        .section-title {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 50px;
+            text-align: center;
+            background: linear-gradient(45deg, var(--neon-pink), var(--electric-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .about-content {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .about-content p {
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        /* Passion section */
+        .passion {
+            padding: 80px 0;
+            position: relative;
+        }
+        
+        .passion-content {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .passion-content p {
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        /* Bible verses */
+        .bible-verses {
+            padding: 80px 0;
+        }
+        
+        .verse {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .verse:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .verse h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: var(--electric-blue);
+        }
+        
+        .verse p {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+        
+        /* Gift box section */
+        .gift-box {
+            padding: 80px 0;
+            position: relative;
+        }
+        
+        .gift-content {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        
+        .gift-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+            color: var(--digital-orange);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        .gift-content h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        
+        .gift-content p {
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        /* Contact button */
+        .contact-btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(45deg, var(--neon-pink), var(--electric-blue));
+            color: white;
+            font-size: 16px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border: none;
+            margin-top: 20px;
+        }
+        
+        .contact-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .contact-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--electric-blue), var(--neon-pink));
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-btn:hover::after {
+            opacity: 1;
+        }
+        
+        .contact-btn span {
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 50px 0;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        
+        .footer-text {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 48px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .section-title {
+                font-size: 32px;
+            }
+            
+            .about-content, .passion-content, .gift-content {
+                padding: 30px;
+            }
+            
+            .verse {
+                padding: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 16px;
+            }
+            
+            .social-icons {
+                gap: 10px;
+            }
+            
+            .social-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 16px;
+            }
+            
+            .read-more-btn, .contact-btn {
+                padding: 12px 25px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+    
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">DAVID ROY</a>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/share/16Q2C4rD9R/" class="social-icon facebook" target="_blank">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://youtube.com/@hshdav?si=rd2SrFlh2-tpkRhW" class="social-icon youtube" target="_blank">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <a href="https://wa.me/+8801300325329" class="social-icon whatsapp" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <a href="mailto:davidroyakayt@gmail.com" class="social-icon gmail" target="_blank">
+                        <i class="fab fa-google"></i>
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="container">
+            <h1>DAVID ROY</h1>
+            <p>A creative space where faith meets design, and innovation inspires purpose.</p>
+            <button class="read-more-btn">Explore More</button>
+        </div>
+    </section>
+    
+    <section class="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <p>Hey there,</p>
+                <p>I'm David Roy—17 years old, first-year college student, and a young man chasing something more than just grades or goals.</p>
+                <p>I'm building my life on self-discipline, self-study, and a Savior who never fails. While most follow trends, I follow Jesus. While the world scrolls endlessly, I pause to study the Bible—not just to learn it, but to live it and teach it.</p>
+                <p>I believe in growing silently, moving differently, and standing out not by noise—but by purpose.</p>
+                <p>📖 The Bible isn't just my guide—it's my heartbeat.</p>
+                <p>🕊️ My dream? To spread truth, light, and the kind of hope this generation is starving for.</p>
+                <p>I'm not perfect. I'm not polished. But I'm real, ready, and radically committed to walking in truth—even when it's not popular.</p>
+                <p>This space—whether you're seeing this on my website, YouTube, or socials—isn't just about me. It's about you. Your walk. Your growth. Your purpose.</p>
+                <p>So if you're searching for real answers, deeper meaning, or just someone who gets it—welcome. Let's grow together. Let's walk in truth. Let's rise above.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section class="passion">
+        <div class="container">
+            <h2 class="section-title">My Passion</h2>
+            <div class="passion-content">
+                <p>🌟 I'm David, a Creative Freelancer Who Turns Ideas Into Stunning Designs! 🌟</p>
+                <p>Whether you're looking for an eye-catching business card to make a lasting impression, a thumb-stopping thumbnail to boost your content's visibility, or expert AI solutions to take your project to the next level, I'm here to help! 💼🎨🚀</p>
+                <p>With my skills and experience, I transform your vision into unique, high-quality designs that stand out in today's fast-paced world. I specialize in:</p>
+                <p>✨ Business Cards – Sleek, professional, and memorable designs that reflect your brand's identity.</p>
+                <p>🎥 Thumbnails – Bold, creative, and engaging thumbnails that grab attention and increase click-through rates.</p>
+                <p>🤖 AI Expertise – Cutting-edge AI-driven designs and automation solutions that optimize your workflow.</p>
+                <p>💡 And Much More – From custom illustrations to brand consulting, I've got you covered!</p>
+                <p>Let's Collaborate! Together, we'll create designs that elevate your brand and make an impact. Get in touch today!</p>
+                <button class="contact-btn" onclick="window.open('https://wa.me/+8801300325329', '_blank')">Contact Me</button>
+            </div>
+        </div>
+    </section>
+    
+    <section class="bible-verses">
+        <div class="container">
+            <h2 class="section-title">Bible Verses</h2>
+            <div class="verse">
+                <h3>Jeremiah 29:11</h3>
+                <p>"For I know the plans I have for you," declares the Lord, "plans to prosper you and not to harm you, plans to give you a hope and a future."</p>
+            </div>
+            <div class="verse">
+                <h3>Isaiah 41:10</h3>
+                <p>"Fear not, for I am with you; be not dismayed, for I am your God. I will strengthen you, I will help you, I will uphold you with my righteous right hand."</p>
+            </div>
+            <div class="verse">
+                <h3>Philippians 4:13</h3>
+                <p>"I can do all things through Christ who strengthens me."</p>
+            </div>
+            <div class="verse">
+                <h3>Romans 8:28</h3>
+                <p>"And we know that in all things God works for the good of those who love Him, who have been called according to His purpose."</p>
+            </div>
+            <div class="verse">
+                <h3>Psalm 23:1</h3>
+                <p>"The Lord is my shepherd; I shall not want."</p>
+            </div>
+            <div class="verse">
+                <h3>Proverbs 3:5-6</h3>
+                <p>"Trust in the Lord with all your heart and lean not on your own understanding; in all your ways submit to Him, and He will make your paths straight."</p>
+            </div>
+            <div class="verse">
+                <h3>Matthew 5:14</h3>
+                <p>"You are the light of the world. A city set on a hill cannot be hidden."</p>
+            </div>
+            <div class="verse">
+                <h3>2 Corinthians 5:7</h3>
+                <p>"For we live by faith, not by sight."</p>
+            </div>
+            <div class="verse">
+                <h3>Psalm 46:1</h3>
+                <p>"God is our refuge and strength, an ever-present help in trouble."</p>
+            </div>
+            <div class="verse">
+                <h3>John 14:27</h3>
+                <p>"Peace I leave with you; my peace I give to you. Not as the world gives do I give to you. Let not your hearts be troubled, neither let them be afraid."</p>
+            </div>
+            <div class="verse">
+                <h3>Ephesians 2:10</h3>
+                <p>"For we are God's masterpiece, created in Christ Jesus to do good works, which God prepared in advance for us to do."</p>
+            </div>
+            <div class="verse">
+                <h3>Matthew 6:33</h3>
+                <p>"But seek first the kingdom of God and His righteousness, and all these things will be added to you."</p>
+            </div>
+            <div class="verse">
+                <h3>1 John 4:4</h3>
+                <p>"Greater is He who is in you than he who is in the world."</p>
+            </div>
+            <div class="verse">
+                <h3>Joshua 1:9</h3>
+                <p>"Be strong and courageous. Do not be afraid; do not be discouraged, for the Lord your God will be with you wherever you go."</p>
+            </div>
+            <div class="verse">
+                <h3>Romans 12:2</h3>
+                <p>"Do not conform to the pattern of this world, but be transformed by the renewing of your mind."</p>
+            </div>
+        </div>
+    </section>
+    
+    <section class="gift-box">
+        <div class="container">
+            <h2 class="section-title">Support My Work</h2>
+            <div class="gift-content">
+                <div class="gift-icon">
+                    <i class="fas fa-gift"></i>
+                </div>
+                <h3>🌟 Support My Work with a Gift! 🌟</h3>
+                <p>If you'd like to show your appreciation for the work I do or simply want to send a gift, you can easily contribute through the following options:</p>
+                <p>Bkash: +880-1300325329</p>
+                <p>Nagad: +880-1300325329</p>
+                <p>Your generous gesture helps me continue creating high-quality content and provides the resources to keep delivering value to my audience. Thank you for your support!</p>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p class="footer-text">Thank you for visiting my website. May God bless you!</p>
+            <div class="social-icons">
+                <a href="https://www.facebook.com/share/16Q2C4rD9R/" class="social-icon facebook" target="_blank">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://youtube.com/@hshdav?si=rd2SrFlh2-tpkRhW" class="social-icon youtube" target="_blank">
+                    <i class="fab fa-youtube"></i>
+                </a>
+                <a href="https://wa.me/+8801300325329" class="social-icon whatsapp" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="mailto:davidroyakayt@gmail.com" class="social-icon gmail" target="_blank">
+                    <i class="fab fa-google"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Simple animation for the read more button
+        document.querySelector('.read-more-btn').addEventListener('click', function() {
+            document.querySelector('.about').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        });
+        
+        // Add animation to verses when they come into view
+        const verses = document.querySelectorAll('.verse');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        verses.forEach(verse => {
+            verse.style.opacity = '0';
+            verse.style.transform = 'translateY(20px)';
+            verse.style.transition = 'all 0.5s ease';
+            observer.observe(verse);
+        });
+    </script>
+</body>
+</html>
